@@ -1,0 +1,1 @@
+# Databasen alustaminen tapahtuu täällä
