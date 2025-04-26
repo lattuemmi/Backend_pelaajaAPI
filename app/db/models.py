@@ -35,7 +35,19 @@ class Event(SQLModel, table=True):
     #   back_populates pitää ytheyden molempiin suuntiin (?)
     player: Player = Relationship(back_populates="events")
 
+#   Malli uuden eventin luontia varten 
+#   Käyttäjä antaa vain type ja detail kentätä
+#   Loput kentät määrittelee crud funktio tiedostossa players_crud.py
+class EventIn(SQLModel):
+    type: str
+    detail: str
 
+class EventOut(SQLModel):
+    id: int
+    type: str
+    detail: str
+    timestamp: datetime
+    player_id: int
 
 #   Malli uuden pelaajan luontia varten
 #   Tietokanta luo id:n joten ei tarve kuin vain nimelle
@@ -43,9 +55,14 @@ class PlayerIn(SQLModel):
     name: str
 
 
-#   Malli uuden eventin luontia varten 
-#   Käyttäjä antaa vain type ja detail kentätä
-#   Loput kentät määrittelee crud funktio tiedostossa players_crud.py
-class EventIn(SQLModel):
-    type: str
-    detail: str
+
+#   Malli vastauksen muotoon
+class PlayerOut(SQLModel):
+    id: int
+    name:str
+
+
+class PlayerAllInfoOut(SQLModel):
+    id: int
+    name: str
+    events: List[EventOut] = []

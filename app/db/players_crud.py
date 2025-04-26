@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from .models import Player, PlayerIn, EventIn, Event
 from sqlmodel import Session, select
 from datetime import datetime
+from typing import List
 
 # Pelaajiin liittyvät CRUD funktiot tulevat tänne 
 
@@ -39,7 +40,6 @@ def get_player_by_id(session: Session, player_id: int):
             status_code = status.HTTP_404_NOT_FOUND, 
             detail=f"Player with id {player_id} not found."
         )
-    
     #   Jos pelaaja löytyy, palautetaan pelaaja
     return player
 
@@ -47,8 +47,8 @@ def get_player_by_id(session: Session, player_id: int):
 #   Funktio pelaajan eventtien löytämiseksi
 #   session --> Tietokantayhteys
 #   Otetaan sisään player_id -> voidaan suodattaa sen perusteella
-#   Otetaan sisään event_type -> voidaan suodattaa tietyn tyypin tapahtumat vaikka oletuksena se on tyhjä
-def get_specific_player_events(session: Session, player_id: int, event_type: str = None):
+#   Otetaan sisään event_type -> voidaan suodattaa tietyn typen mukaan, ei kuitenkaan ole pakko
+def get_specific_player_events(session: Session, player_id: int, event_type: List[str] = None):
     #   Haetaan pelaaja id:n perusteella
     player = session.get(Player, player_id)
     #   Jos pelaajaa ei löydy, heitetään 404
@@ -65,13 +65,11 @@ def get_specific_player_events(session: Session, player_id: int, event_type: str
         known_types = ["level_started", "level_solved"]
         if event_type not in known_types:
             raise HTTPException(
-                status_code = status.HTTP_400_BAD_REQUEST,
-                detail = f"Unkown event type: {event_type}"
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Unkown event type: {event_type}"
             )
-        
         #   Käydäään läpi kaikki eventit, valitaan sieltä ne jotka täyttävät ehdon ja tehdään niistä uusilista
-        events = [event for event in events if event.type == event_type]
-    
+        events = [event for event in events if event.type in event.type == event_type]
     #   Palautetaan lista eventeistä
     return events
 
