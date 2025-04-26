@@ -2,21 +2,27 @@ from fastapi import HTTPException, status
 from .models import Event
 from sqlmodel import Session, select
 
-# Eventteihin liittyvät CRUD operaatiot tulevat tänne
+# Eventteihin liittyvä CRUD operaatio tulee tänne
 
 
-#GET/events - palauttaa kaikki eventit
-# statuskoodi: 200
-# Jos ei eventtejä, palauttaa tyhjän listan ( tarkista response spekseistä)
-# Jos kysellään tuntematonta evettyyppiä, palautuu Bad request
-
+# get_events funktio ottaa sisään session (tietokanta yhteys?) ja event_typen joka on suodatin 
 def get_events(session: Session, event_type: str = None):
+    #   known_types --> määritelään lista tunnetuista eventtityypeistä
     known_types = ["level_started", "level_solved"]
+    
+    # Tarkistetaan onko annettu event_type, jos ei ole niin palautetaan kaikki eventit myöhemmin
     if event_type:
+        #   Jos käyttäjää antaa tuntemattonan eventtyypin, palautetaan 404
         if event_type not in known_types:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Unknown event type: {event_type}"
             )
+        #   Jos eventtype on tunnettu, tehdään tietokantakysely
+        #   Haetaan Event-taulusta ja suodatetaan eventit jotka vastaa tunnettua tyyppiä
+        #   Suoritetaan ja palautetaan kaikki löytynyt listana
         return session.exec(select(Event).where(Event.type == event_type)).all()
+    
+    #   Jos käyttäjä ei antanut mitän event_typeä, tehdään kysely jossa kysellään kaikki eventit ja palautetaan ne listana
     return session.exec(select(Event)).all()
+

@@ -6,6 +6,7 @@ from sqlmodel import Session
 
 # Pelaajien endpoint funktiot
 
+#   
 router = APIRouter(prefix = "/players")
 
 # Luo uuden pelaajan
