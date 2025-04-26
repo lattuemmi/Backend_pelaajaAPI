@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status, Depends
-from ..db.models import PlayerIn
+from ..db.models import PlayerIn, EventIn
 from ..db.players_crud import create_player, create_event_for_player, get_player_by_id, get_players, get_specific_player_events
 from ..db.database import get_session
 from sqlmodel import Session
@@ -33,5 +33,5 @@ def fetch_player_by_id_and_their_events(session: Session = Depends(get_session))
 
 # Luo uuden eventin pelaajalle
 @router.post("/{id}/events", status_code=status.HTTP_201_CREATED)
-def create_new_event_for_player(session: Session = Depends(get_session)):
-    return create_event_for_player(session)
+def create_new_event_for_player(id: int, event_in: EventIn, session: Session = Depends(get_session)):
+    return create_event_for_player(session, player_id = id, event_in = event_in)
