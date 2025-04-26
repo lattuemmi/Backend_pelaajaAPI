@@ -21,14 +21,14 @@ def fetch_players(session: Session = Depends(get_session)):
 
 # Palauttaa tietyn pelaajan kaikki tiedot
 @router.get("/{player_id}", status_code=status.HTTP_200_OK)
-def fetch_player_by_id(session: Session = Depends(get_session)):
-    return get_player_by_id(session)
+def fetch_player_by_id(id: int, session: Session = Depends(get_session)):
+    return get_player_by_id(session, player_id = id)
 
 
 # Palauttaa tietyn pelaajan kaikki eventit
 @router.get("/{id}/events", status_code = status.HTTP_200_OK)
-def fetch_player_by_id_and_their_events(session: Session = Depends(get_session)):
-    return get_specific_player_events(session)
+def fetch_player_by_id_and_their_events(id: int, session: Session = Depends(get_session)):
+    return get_specific_player_events(session, player_id = id)
 
 
 # Luo uuden eventin pelaajalle

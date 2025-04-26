@@ -9,7 +9,6 @@ from datetime import datetime
 #POST/players - uuden pelaajan luominen
 #   Onnistuess statuskoodi: 201
 #   Jos request sisältää virheellistä dataa, palauta 422
-
 def create_player(session: Session, player_in: PlayerIn):
     pelaaja = Player.model_validate(player_in)
     session.add(pelaaja)
