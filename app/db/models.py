@@ -41,7 +41,9 @@ class Event(SQLModel, table=True):
 class EventIn(SQLModel):
     type: str
     detail: str
+ 
 
+#   Malli eventin vastaukseksi jotta saadaan se speksien mukaiseksi
 class EventOut(SQLModel):
     id: int
     type: str
@@ -56,12 +58,13 @@ class PlayerIn(SQLModel):
 
 
 
-#   Malli vastauksen muotoon
+#   Malli vastaukelle, jotta saadaan siihen muotoon mikä on speksattu
 class PlayerOut(SQLModel):
     id: int
     name:str
 
 
+#   Malli vastaukselle, jotta saadaan siihen muotoon mikä on speksattu
 class PlayerAllInfoOut(SQLModel):
     id: int
     name: str
