@@ -1,6 +1,6 @@
 Tässä projektissa luodaan pelaajaAPI Backend kurssin loppuharjoitukseksi. 
 
-Koodia olen kommentoinut oman ymmärrykseni varmistamiseksi ja koska opettaja sanoi että opiskeloijat ei koskaan kommentoi :D
+Koodia olen kommentoinut oman ymmärrykseni varmistamiseksi ja koska opettaja sanoi että opiskelijat ei koskaan kommentoi :D
 
 Käynnistysohjeet:
 

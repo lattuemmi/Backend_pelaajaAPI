@@ -1,8 +1,8 @@
-from fastapi import HTTPException, status
-from .models import Player, PlayerIn, EventIn, Event
-from sqlmodel import Session, select
-from datetime import datetime
-from typing import List
+from fastapi import HTTPException, status  #Täällä tuotu jotta saadaan heitettyä virhe, status antaa koodit valmiiksi
+from .models import Player, PlayerIn, EventIn, Event #Tuodaan käytettäviä tietokanta malleja
+from sqlmodel import Session, select #Tietokanta yhteyden luomista varten ja kyselyiden tekoon
+from datetime import datetime  #Päästään käsiksi päivämäärään ja aikaan
+from typing import Optional  #Tuodaan jotta voidaan sanoa, että muuttujassa ei pakko ole olla mitään
 
 
 
@@ -49,8 +49,8 @@ def get_player_by_id(session: Session, player_id: int):
 #   Funktio pelaajan eventtien löytämiseksi
 #   session --> Tietokantayhteys
 #   Otetaan sisään player_id -> voidaan suodattaa sen perusteella
-#   Otetaan sisään event_type -> voidaan suodattaa tietyn typen mukaan, ei kuitenkaan ole pakko
-def get_specific_player_events(session: Session, player_id: int, event_type: List[str] = None):
+#   Otetaan sisään event_type -> voidaan suodattaa tietyn typen( syötteen ) mukaan, ei kuitenkaan ole pakko -> kohta voi olla tyhjä
+def get_specific_player_events(session: Session, player_id: int, event_type: Optional[str] = None):
     #   Haetaan pelaaja id:n perusteella
     player = session.get(Player, player_id)
     #   Jos pelaajaa ei löydy, heitetään 404
@@ -64,6 +64,7 @@ def get_specific_player_events(session: Session, player_id: int, event_type: Lis
     #   Tarkistetaan löytyykö eventtejä
     if event_type:
         #   Tarkistetaan löytyykö tunnettuja event tyyppejä, jos ei heitetään 400
+        #   Sallitut even tyypit on määritelty listaan known_types
         known_types = ["level_started", "level_solved"]
         if event_type not in known_types:
             raise HTTPException(
