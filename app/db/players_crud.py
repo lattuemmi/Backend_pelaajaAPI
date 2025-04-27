@@ -4,6 +4,8 @@ from sqlmodel import Session, select
 from datetime import datetime
 from typing import List
 
+
+
 # Pelaajiin liittyvät CRUD funktiot tulevat tänne 
 
 

@@ -1,3 +1,6 @@
+#Tuodaan Session -> yhteys tietokantaan
+#create_engine -> yhdistää ohjelman ja tietokannan
+#SQLModel -> luokka tietokanta taulujen luomista varten
 from sqlmodel import Session, create_engine, SQLModel
 
 # Databasen alustaminen tapahtuu täällä
@@ -20,7 +23,7 @@ def create_db():
 
 
 #   Tätä kohtaa en 100% sisäistä
-#   Luodaan tietokantayhteys ja suljetaan se (?)
+#   Mutta luodaan tietokantayhteys ja suljetaan se
 def get_session():
     with Session(engine) as session:
         yield session
