@@ -1,9 +1,10 @@
+#Tuodaan jotta voidaan luoda reititin mitä käytetään, status HTTP koodien käyttoon ja Depends riippuvuuksiin
 from fastapi import APIRouter, status, Depends
-from ..db.models import EventOut
-from ..db.events_crud import get_events
-from ..db.database import get_session
-from sqlmodel import Session
-from typing import List
+from ..db.models import EventOut # Tuodaan käytettävä tietokantamalli
+from ..db.events_crud import get_events #Tuodaan käytettävä funktio
+from ..db.database import get_session # Tuodaan käytettävä funktio
+from sqlmodel import Session #Tietokanta yhteys
+from typing import List  #Voidaan kertoa että objekti sisältää listan asioita
 
 #Eventtien endpoint funktiot tänne
 

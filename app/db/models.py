@@ -1,6 +1,7 @@
+#Tuodaan tietokantamalli, Voidaan määrittää primary key ja relationship, jolla sain Eventsin osaksi playeria
 from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional, List
-from datetime import datetime
+from typing import Optional, List   #Tämän avulla voidaan määrittää että tieto ei ole pakollinen, list -> voidaan luoda attribuutti joka sisältää toisen taulun 
+from datetime import datetime  #Tämän avulla päästään käsiksi päivämäärään ja aikaan
 
 
 # Tietokanta mallien määrittelyt

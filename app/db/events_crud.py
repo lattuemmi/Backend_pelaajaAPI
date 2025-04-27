@@ -1,6 +1,6 @@
-from fastapi import HTTPException, status
-from .models import Event
-from sqlmodel import Session, select
+from fastapi import HTTPException, status #Käytetään palauttamaan esimerkiski virhe, status antaa numerokoodit valmiiksi
+from .models import Event   #Tuodaan malli joka kuvaa tietokannan Events taulun rakennetta
+from sqlmodel import Session, select  #Työkaluja tietokanta kyselyihin, avataan yhteys ja rakennetaan kysely
 
 # Eventteihin liittyvä CRUD operaatio tulee tänne
 

@@ -1,9 +1,10 @@
-from typing import List, Optional
-from fastapi import APIRouter, status, Depends
-from ..db.models import PlayerIn, PlayerOut, PlayerAllInfoOut,  EventIn, EventOut
+from typing import List, Optional  # Voidaan kertoa että objekti sisältää listan asioita, optional -> kenttä ei ole pakollinen
+from fastapi import APIRouter, status, Depends # Tuodaan että voidaan luoda reititin, status HTTP koodia varten, Depends riippuvuuksiin
+from ..db.models import PlayerIn, PlayerOut, PlayerAllInfoOut,  EventIn, EventOut  #Tuodaan käytettävät mallit
+#   Tuodaan käytettävät funktiot
 from ..db.players_crud import create_player, create_event_for_player, get_player_by_id, get_players, get_specific_player_events
-from ..db.database import get_session
-from sqlmodel import Session
+from ..db.database import get_session   #Tuodaan käytettävä funktio
+from sqlmodel import Session    # Tietokantayhteys
 
 # Pelaajien endpoint funktiot
 
